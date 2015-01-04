@@ -135,7 +135,7 @@ class Persistent
 	public function __construct($cmd, $timeout, $utv, $id, $sharedkey)
 	{
 		//Use stdbuf to make the output and error streams unbuffered.
-		$this->cmd = "stdbuf -o0 -e0 " . $cmd . " 2>&1";
+		$this->cmd = /*"stdbuf -o0 -e0 " . */ "unbuffer -p " . $cmd . " 2>&1";
 		$this->timeout = $timeout * 1000000;
 		$this->descriptors = array(
 			0 => array('pipe', 'r'),  // STDIN
@@ -377,11 +377,11 @@ class Interact
 
 		if($this->is_running() === false && strlen($stdout) > 0)
 		{
-			return json_encode(array('data' => $stdout . "System message: The child process has ended.\n", 'status' => 0));
+			return json_encode(array('data' => $stdout . "{s}System message: The child process has ended.{/s}\n", 'status' => 0));
 		}
 		else if($this->is_running() === false && strlen($stdout) === 0)
 		{
-			return json_encode(array('data' => "System message: No child process with an output has been detected.\n", 'status' => 0));
+			return json_encode(array('data' => "{s}System message: No child process with an output has been detected.{/s}\n", 'status' => 0));
 		}
 		else
 		{
@@ -394,7 +394,7 @@ class Interact
 	{
 		if($this->is_running() === false)
 		{
-			return json_encode(array('data' => "System message: No child process available to pass input to.\n", 'status' => 0));
+			return json_encode(array('data' => "{s}System message: No child process available to pass input to.{/s}\n", 'status' => 0));
 		}
 		else
 		{
@@ -412,16 +412,16 @@ class Interact
 		{
 			if(posix_kill($this->session_info['pid'], 9))
 			{
-				return json_encode(array('data' => "System message: Successfully killed PID {$this->session_info['pid']}.\n", 'status' => 0));
+				return json_encode(array('data' => "{s}System message: Successfully killed PID {$this->session_info['pid']}.{/s}\n", 'status' => 0));
 			}
 			else
 			{
-				return json_encode(array('data' => "System message: Unable to kill PID {$this->session_info['pid']}.\n", 'status' => 0));
+				return json_encode(array('data' => "{s}System message: Unable to kill PID {$this->session_info['pid']}.{/s}\n", 'status' => 0));
 			}
 		}
 		else
 		{
-			return json_encode(array('data' => "System message: Process has already ended.\n", 'status' => 0));
+			return json_encode(array('data' => "{s}System message: Process has already ended.{/s}\n", 'status' => 0));
 		}
 	}
 }

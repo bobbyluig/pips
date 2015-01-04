@@ -1,0 +1,40 @@
+body
+{
+	height:100%;
+	padding-top: 50px;
+	margin: 0;
+	font-family: 'Ubuntu Mono', sans-serif;
+	color: #00ee00;
+	background-color: #121314;
+}
+#container
+{
+	height: 320px;
+	width: 550px;
+	background-color: #000000;
+	overflow: auto;
+	padding: 5px;
+	margin: 0 auto;
+}
+#stdin input, button
+{
+	font-family: 'Ubuntu Mono', sans-serif;
+	background: #000000;
+	color: #00ee00;
+}
+#stdin
+{
+	width: 400px;
+	text-align: center;
+	margin: 0 auto;
+}
+#bottom
+{
+	position: absolute;
+	right: 3px;
+	top: 3px;
+}
+#sys
+{
+	color: #FFA500;
+}

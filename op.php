@@ -30,7 +30,7 @@ switch($_GET['type'])
 		$info = $interact->get_info();
 		if($info['pid'] > 0 && $info['running'])
 		{
-			echo json_encode(array('data' => "Process has already started.\n", 'status' => 1));
+			echo json_encode(array('data' => "{s}Process has already started.{/s}\n", 'status' => 1));
 			exit();
 		}
 		
@@ -44,7 +44,7 @@ switch($_GET['type'])
 			$info = $interact->get_info();
 			if($info['pid'] > 0 && $info['running'])
 			{
-				echo json_encode(array('data' => "Process started.\nCommand used: {$info['cmd']}\nPID: {$info['pid']}\n", 'status' => 1));
+				echo json_encode(array('data' => "{s}System message: Process started.{/s}\n", 'status' => 1));
 				exit();
 			}
 			else
@@ -52,7 +52,7 @@ switch($_GET['type'])
 				usleep(500000);
 			}
 		}
-		echo json_encode(array('data' => "Failed to start process.\n", 'status' => 0));
+		echo json_encode(array('data' => "{s}Failed to start process.{/s}\n", 'status' => 0));
 		break;
 		
 	case 'read':
@@ -71,7 +71,7 @@ switch($_GET['type'])
 		break;
 		
 	case 'kill':
-			echo $interact->kill();
+		echo $interact->kill();
 		break;
 		
 	default:
