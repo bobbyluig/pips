@@ -14,6 +14,7 @@ Features
 2. Minimal memory usage (cleared on every read/write).
 3. Fast (or at least faster than using files for cache).
 4. Functional on nearly all Linux servers.
+5. Automatic data encryption and decryption.
 
 Installation
 ------------
